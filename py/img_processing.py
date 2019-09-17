@@ -56,7 +56,7 @@ def split_gif_into_frames_in_dir(gif_name, dir=None, mode=0, f=(1, 1)):
     """将gif图片按帧将图片放在一个文件夹中，在这个过程中可以改变帧大小.
 
     Args:
-        gif_name: gif文件名.
+        gif_name: gif文件名.也可以是视频文件.
         dir: 最后图片存储的目录.
         mode: 改变帧宽高为某值取值为1，按比例改变帧大小取值为0.
         f: mode值为1时意即目标帧宽高，mode值为0时意即比例，类型为大小为2的元组
