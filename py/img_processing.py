@@ -13,6 +13,18 @@ def time_log(start, descrip):
         descrip: 对所用时间事件的描述.
     """
     print("%s %.3f seconds"%(descrip, time.time()-start))
+    
+def progress_tell(count, al, start):
+    """显示进度.
+
+    Args:
+        count: 列表元素索引.
+        al: 列表长度.
+        start: 计时开始点.
+    """
+    print("processing %dth/%d, progress %.2f%%, and you need %.2f seconds to finish it." % (count, al,
+                                                                                          (count+1)/al*100, (time.time()-start)*(al-1-count)))
+
 
 def output_frames(gif, frame, ret, dir, size=(640, 480), name=0):
     """将VideoCapture流(gif)中帧输出在dir中.
@@ -82,3 +94,26 @@ def split_gif_into_frames_in_dir(gif_name, dir=None, mode=0, f=(1, 1)):
         print('all frames are in %s'%dir)
         gif.release()   #收尾工作
         cv2.destroyAllWindows()
+        
+def compose_gif_from_dir(dire, gif_name, key=None, duration=0.1):
+    """从split_gif_into_frames_in_dir操作中的目录中取出图片合成gif图.
+
+    Args:
+        dire:含有每一帧图片的目录.
+        gif_name:目标动图文件名.
+        key: 帧的文件名排序决定函数, 影响最终动图帧的顺序.
+        duration: 帧与帧之间时间间隔, 以s为单位.
+    """
+    image_list = os.listdir(dire)
+    image_list.sort(key=key)
+    print(image_list)
+    frames = []
+    assert image_list is not None, 'can\'t find your images' 
+    image_list_len = len(image_list)
+    start = time.time()
+    for (idx, il) in enumerate(image_list):
+        frames.append(imageio.imread(os.path.join(dire, il)))
+        progress_tell(idx, image_list_len, start)
+        start = time.time()
+    imageio.mimsave(gif_name, frames, 'GIF', duration=duration)
+    print('you\'ve got %s' % gif_name)
