@@ -27,7 +27,7 @@ twpy.img_processing.compose_gif_from_dir('hopt', '6.gif', compare, 0.1)
 #生成13位随机字符串
 twpy.twpy_random.gen_rand_charnum_seq(13)
 
-#从一[网页链接](http://konachan.net/post?page=9790&tags=)下载类名为preview的图片到imgs目录中
+#从一(网页链接)[http://konachan.net/post?page=9790&tags=]下载类名为preview的图片到imgs目录中
 twpy.download.dnld_pic_in_webpage('http://konachan.net/post?page=9790&tags=', 'preview', 'imgs')
 
 #每隔10分钟截取屏幕信息保存至logPic目录中
