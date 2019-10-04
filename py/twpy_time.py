@@ -6,7 +6,7 @@ def display_seconds(secondNum):
 	Returns:
 		convertStr: 将秒数换算成易懂的时间间隔字符串。
 	"""
-	secondStr = str(secondNum % 60)
+	secondStr = str(secondNum % 60)[:5]
 	convertStr = secondStr+'s '
 	if secondNum > 59:
 		minuteNum = secondNum // 60
