@@ -14,7 +14,7 @@ def time_log(start, descrip):
         descrip: 对所用时间事件的描述.
     """
     print("%s %.3f seconds"%(descrip, time.time()-start))
-    
+
 def progress_tell(count, al, start):
     """显示进度.
 
@@ -25,7 +25,6 @@ def progress_tell(count, al, start):
     """
     print("processing %dth/%d, progress %.2f%%, and you need %.2f seconds to finish it." % (count, al,
                                                                                           (count+1)/al*100, (time.time()-start)*(al-1-count)))
-
 
 def output_frames(gif, frame, ret, dir, size=(640, 480), name=0):
     """将VideoCapture流(gif)中帧输出在dir中.
@@ -82,10 +81,10 @@ def split_gif_into_frames_in_dir(gif_name, dir=None, mode=0, f=(1, 1)):
         gif = cv2.VideoCapture(gif_name)
         ret, frame = gif.read()
         h, w, _ = frame.shape
+        #name = 0
         if dir is None: #若没有明确说明目录名，在同一目录下创建默认文件夹
             gifna = gif_name.strip().split('.')[0]
             dir='framesIn'+gifna[0].upper()+gifna[1:]+'Gif'
- 
         if not os.path.exists(dir):
             os.mkdir(dir)
         if mode==0:
@@ -95,7 +94,7 @@ def split_gif_into_frames_in_dir(gif_name, dir=None, mode=0, f=(1, 1)):
         print('all frames are in %s'%dir)
         gif.release()   #收尾工作
         cv2.destroyAllWindows()
-        
+
 def compose_gif_from_dir(dire, gif_name, key=None, duration=0.1):
     """从split_gif_into_frames_in_dir操作中的目录中取出图片合成gif图.
 
@@ -118,3 +117,17 @@ def compose_gif_from_dir(dire, gif_name, key=None, duration=0.1):
         start = time.time()
     imageio.mimsave(gif_name, frames, 'GIF', duration=duration)
     print('you\'ve got %s' % gif_name)
+
+def get_video_frame_info(filename):
+    """得到filename的视频帧信息。
+
+    Args:
+        filename: 视频文件路径.
+    """
+    print(filename)
+    stream = cv2.VideoCapture(filename)
+    print('帧宽度', stream.get(cv2.CAP_PROP_FRAME_WIDTH))
+    print('帧高度', stream.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    print('帧率', stream.get(cv2.CAP_PROP_FPS))
+    print('总帧数', stream.get(cv2.CAP_PROP_FRAME_COUNT))
+    print('时长秒数', stream.get(cv2.CAP_PROP_FRAME_COUNT) / stream.get(cv2.CAP_PROP_FPS))
