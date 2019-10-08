@@ -24,6 +24,9 @@ def compare(a):
 #将hopt目录中的图片按图片名对应数值大小合成fps为10的gif图片
 twpy.img_processing.compose_gif_from_dir('hopt', '6.gif', compare, 0.1)
 
+#获取1.mp4视频流帧信息
+twpy.img_processing.get_video_frame_info('1.mp4')
+
 #生成13位随机字符串
 twpy.twpy_random.gen_rand_charnum_seq(13)
 
