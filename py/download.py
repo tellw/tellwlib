@@ -6,15 +6,15 @@ import time
 from twpy_time import display_seconds
 
 def download_file(url, filename):
-	"""将链接中的数据存储入文件中。
+    """将链接中的数据存储入文件中。
 
-	Args:
-		url: 链接。
-		filename: 文件路径名。
-	Raises:
-		KeyboardInterrupt: 用户按^C引发异常。
-		Exception: 发生异常。
-	"""
+    Args:
+        url: 链接。
+        filename: 文件路径名。
+    Raises:
+        KeyboardInterrupt: 用户按^C引发异常。
+        Exception: 发生异常。
+    """
     if os.path.exists(filename):
         print('file '+filename+' exists!')
         return
@@ -38,17 +38,17 @@ def download_file(url, filename):
             os.remove(filename)
 
 def dnld_pic_in_webpage(url, cls, savedir):
-	"""将链接中图片链接找出，并把图片保存到一个目录中。
+    """将链接中图片链接找出，并把图片保存到一个目录中。
 
-	Args:
-		url: 链接。
-		cls: 所要保存的图片元素在html中的类名。
-		savedir: 图片保存的目录。
-	Returns:
-		duration: 下载该网页中所有图片的过程中所花费的时间。
-	"""
-	tstart = time.time()
-	print('getting '+url)
+    Args:
+        url: 链接。
+        cls: 所要保存的图片元素在html中的类名。
+        savedir: 图片保存的目录。
+    Returns:
+        duration: 下载该网页中所有图片的过程中所花费的时间。
+    """
+    tstart = time.time()
+    print('getting '+url)
     html = requests.get(url).text
     soup = BeautifulSoup(html, 'html.parser')
     for img in soup.find_all('img', class_=cls):
