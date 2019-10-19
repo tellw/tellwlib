@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import os
 import traceback
 import time
-from twpy_time import display_seconds
+from tellwlib.py.twpy_time import display_seconds
 
 def download_file(url, filename):
     """将链接中的数据存储入文件中。
