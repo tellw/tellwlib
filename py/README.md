@@ -12,7 +12,7 @@ pip install Pillow
 
 例:
 ```python
-import tellwlib.py as twpy
+from tellwlib import py as twpy
 
 #将GIF.gif一帧一帧按0.7成比例缩小放至hopt目录中
 twpy.img_processing.split_gif_into_frames_in_dir('GIF.gif', 'hopt', 0, (0.7, 0.7)) 
@@ -21,7 +21,7 @@ twpy.img_processing.split_gif_into_frames_in_dir('GIF.gif', 'hopt', 0, (0.7, 0.7
 def compare(a):
     return int(a.strip().split('.')[0])
 
-#将hopt目录中的图片按图片名对应数值大小合成fps为10的gif图片
+#将hopt目录中的图片按图片名对应数值大小合成fps为10的gif图片(目前放弃这种合成gif方法，该方法合成的文件占用空间太大，不及使用Photoshop合成的舒服。
 twpy.img_processing.compose_gif_from_dir('hopt', '6.gif', compare, 0.1)
 
 #获取1.mp4视频流帧信息
